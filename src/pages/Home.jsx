@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from "react"
-import { searchMovie } from "../api/movies";
+import { searchMovies } from "../Api/movies";
 
 import Navbar from '../Components/Navbar';
 import Hero from '../Components/Hero';
