@@ -1,9 +1,7 @@
-import React from 'react'
-
 export default function Loading() {
   return (
-    <div>
-        <div className='spinner'>Loading...</div>
+    <div className="loader-container">
+      <div className="loader"></div>
     </div>
   )
 }

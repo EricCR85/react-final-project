@@ -1,13 +1,16 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import { IMG_URL } from "../api/movies";
 
-export default function MovieCard() {
+export default function MovieCard({ movie }) {
   return (
-    <div>
-      <div className="card">
-        <img src={IMG_URL + movie.poster_path} alt={movie.title} />
-        <p>{movie.title}</p>
-      </div>
+    <div className="card">
+      <Link to={`/movie/${movie.id}`}>
+      <img
+      src={IMG_URL + movie.poster_path}
+      alt={movie.title}
+      />
+      </Link>
+      <p>{movie.title}</p>
     </div>
-  );
+  )
 }

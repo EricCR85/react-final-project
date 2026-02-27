@@ -1,13 +1,20 @@
-import React from 'react'
+import { renderToPipeableStream } from "react-dom/server";
+import MovieCard from "./MovieCard";
 
 export default function MovieList({ movies }) {
+  if (!movies || movies.length === 0) {
+    return (
+      <div className="no-resutls">
+        <p>No movies found.</p>
+      </div>
+    )
+  }
+
   return (
-    <div>
-        <div className='grid-container'>
-            {movies.map(mvoie => (
-                <MovieCard key={movies.id} movie={movie} />
-            ))}
-        </div>
+    <div className="grid-container">
+      {movies.map((movie) => (
+        <MovieCard key={movie.id} movie={movie} />
+      ))} 
     </div>
   )
 }
