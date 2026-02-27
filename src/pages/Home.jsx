@@ -1,4 +1,4 @@
-​import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BASE_URL, API_KEY } from "../Api/movie";
 import Navbar from '../Components/Navbar';
 import Hero from '../Components/Hero';
