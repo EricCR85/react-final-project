@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BASE_URL, API_KEY } from "../Api/config";
+import { BASE_URL, API_KEY } from "../Api/configs";
 import Navbar from '../Components/Navbar';
 import Hero from '../Components/Hero';
 import GenreFilter from '../Components/GenreFilter';
@@ -8,7 +8,14 @@ import Pagination from '../Components/Pagination';
 import SearchBar from '../Components/SearchBar';
 import MovieList from '../Components/MovieList';
 import Loading from '../Components/Loading';
-import { mapRating } from "../utils/ratingMap";
+import RatingMap from '../utils/ratingMap';
+import { 
+  getPopularMovies,
+  getTopRatedMovies,
+  getUpcomingMovies,
+  searchMovies
+} from '../Api/configs'
+  import { Form } from 'react-router-dom';
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
