@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BASE_URL, API_KEY } from "../Api/movie";
+import { BASE_URL, API_KEY } from "../Api/config";
 import Navbar from '../Components/Navbar';
 import Hero from '../Components/Hero';
 import GenreFilter from '../Components/GenreFilter';

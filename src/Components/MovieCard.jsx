@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IMG_URL } from "../api/movies";
+import { IMG_URL } from "../Api/config";
 
 export default function MovieCard({ movie }) {
   return (
