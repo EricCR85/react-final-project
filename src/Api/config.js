@@ -1,4 +1,4 @@
-export const TMDB_API_KEY = `9db3ff50f370b9420c7cc3fda825960b`;
+export const API_KEY = `9db3ff50f370b9420c7cc3fda825960b`;
 export const BASE_URL = "https://api.themoviedb.org/3";
 export const IMG_URL = "https://image.tmdb.org/t/p/w500"
 
@@ -28,30 +28,30 @@ export const IMG_URL = "https://image.tmdb.org/t/p/w500"
 // }
 
 
-export const searchMovies = async (wuery) => {
+export const searchMovies = async (query) => {
     const res = await fetch (
-        `${BASE_URL}/search/movie?api-key=${TMDB_API_KEY}&query=${query}`
+        `${BASE_URL}/search/movie?api-key=${API_KEY}&query=${query}`
     );
     return res.json();
 };
 
 export const getPopularMovies = async () => {
     const res = await fetch(
-        `${BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}`
+        `${BASE_URL}/movie/popular?api_key=${API_KEY}`
     );
     return res.json();
 };
 
 export const getTopRatedMovies = async () => {
     const res = await fetch (
-        `${BASE_URL}/movie/top_rated?api_key=${TMDB_API_KEY}`
+        `${BASE_URL}/movie/top_rated?api_key=${API_KEY}`
     );
     return res.json();
 };
 
 export const getUpcomingMovies = async () => {
     const res = await fetch(
-        `${BASE_URL}/movie/upcoming?api_key=${TMDB_API_KEY}`
+        `${BASE_URL}/movie/upcoming?api_key=${API_KEY}`
     );
     return res.json();
 };
