@@ -43,10 +43,10 @@ export default function Home() {
     setQuery(text);
     setPage(1);
   }
-    //eslint-disable-next-line react-hook/echaustive-deps
-
+  
   useEffect(() => {
     fetchMovies();
+    //eslint-disable-next-line react-hook/echaustive-deps
   }, [query, selectedGenres, rating, page]);
 
   return (
