@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 const GENRES = [
   { id: 28, name: "Action" },

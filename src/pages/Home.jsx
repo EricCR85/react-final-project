@@ -9,12 +9,12 @@ import SearchBar from '../Components/SearchBar';
 import MovieList from '../Components/MovieList';
 import Loading from '../Components/Loading';
 import { mapRating } from '../utils/ratingMap';
-import { 
-  getPopularMovies,
-  getTopRatedMovies,
-  getUpcomingMovies,
-  searchMovies
-} from '../Api/config'
+// import { 
+//   getPopularMovies,
+//   getTopRatedMovies,
+//   getUpcomingMovies,
+//   searchMovies
+// } from '../Api/config'
   // import { Form } from 'react-router-dom';
 
 export default function Home() {
@@ -43,6 +43,7 @@ export default function Home() {
     setQuery(text);
     setPage(1);
   }
+    //eslint-disable-next-line react-hook/echaustive-deps
 
   useEffect(() => {
     fetchMovies();
