@@ -1,21 +1,83 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+// import { BASE_URL, API_KEY } from "../Api/config";
+// import Navbar from '../Components/Navbar';
+// import Hero from '../Components/Hero';
+// import GenreFilter from '../Components/GenreFilter';
+// import RatingFilter from '../Components/RatingFilter';
+// import Pagination from '../Components/Pagination';
+// import SearchBar from '../Components/SearchBar';
+// import MovieList from '../Components/MovieList';
+// import Loading from '../Components/Loading';
+// import { mapRating } from '../utils/ratingMap';
+// // import { 
+// //   getPopularMovies,
+// //   getTopRatedMovies,
+// //   getUpcomingMovies,
+// //   searchMovies
+// // } from '../Api/config'
+//   // import { Form } from 'react-router-dom';
+
+// export default function Home() {
+//   const [movies, setMovies] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const [query, setQuery] = useState("");
+//   const [selectedGenres, setSelectedGenres] = useState([]);
+//   const [rating, setRating] = useState("");
+//   const [page, setPage] = useState(1);
+
+//   async function fetchMovies() {
+//     setLoading(true);
+//     const genreString = selectedGenres.join(",");
+//     const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&page=${page}&with_genres=${genreString}&query=${query}`;
+//     const res = await fetch(url);
+//     const data = await res.json();
+//     const filtered = data.results.filter(movie => {
+//       if (!rating) return true;
+//       return mapRating(movie.vote_average) === rating;
+//     });
+//     setMovies(filtered);
+//     setLoading(false);
+//   }
+
+//   async function handleSearch(text) {
+//     setQuery(text);
+//     setPage(1);
+//   }
+  
+//   useEffect(() => {
+//     fetchMovies();
+//     //eslint-disable-next-line react-hook/echaustive-deps
+//   }, [query, selectedGenres, rating, page]);
+
+//   return (
+//     <>
+//       <Navbar />
+//       <Hero />
+//       <SearchBar onSearch={handleSearch} />
+//       <GenreFilter selected={selectedGenres} onChange={setSelectedGenres} />
+//       <RatingFilter rating={rating} onChange={setRating} />
+//       <Pagination
+//         page={page}
+//         onPrev={() => setPage(page - 1)}
+//         onNext={() => setPage(page + 1)}
+//       />
+//       {loading ? <Loading /> : <MovieList movies={movies} />}
+//     </>
+//   );
+// }
+
+
+import React, { useEffect, useState } from "react";
 import { BASE_URL, API_KEY } from "../Api/config";
-import Navbar from '../Components/Navbar';
-import Hero from '../Components/Hero';
-import GenreFilter from '../Components/GenreFilter';
-import RatingFilter from '../Components/RatingFilter';
-import Pagination from '../Components/Pagination';
-import SearchBar from '../Components/SearchBar';
-import MovieList from '../Components/MovieList';
-import Loading from '../Components/Loading';
-import { mapRating } from '../utils/ratingMap';
-// import { 
-//   getPopularMovies,
-//   getTopRatedMovies,
-//   getUpcomingMovies,
-//   searchMovies
-// } from '../Api/config'
-  // import { Form } from 'react-router-dom';
+import Navbar from "../Components/Navbar";
+import Hero from "../Components/Hero";
+import GenreFilter from "../Components/GenreFilter";
+import RatingFilter from "../Components/RatingFilter";
+import Pagination from "../Components/Pagination";
+import SearchBar from "../Components/SearchBar";
+import MovieList from "../Components/MovieList";
+import Loading from "../Components/Loading";
+import { mapRating } from "../utils/ratingMap";
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
@@ -28,25 +90,45 @@ export default function Home() {
   async function fetchMovies() {
     setLoading(true);
     const genreString = selectedGenres.join(",");
-    const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&page=${page}&with_genres=${genreString}&query=${query}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    const filtered = data.results.filter(movie => {
-      if (!rating) return true;
-      return mapRating(movie.vote_average) === rating;
-    });
-    setMovies(filtered);
+
+    // Use different endpoints based on whether user is searching
+    let url;
+    if (query.trim()) {
+      // Search endpoint - search by query text
+      url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${page}`;
+    } else {
+      // Discover endpoint - supports genre filtering
+      url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&page=${page}&with_genres=${genreString}`;
+    }
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (data.results) {
+        const filtered = data.results.filter((movie) => {
+          if (!rating) return true;
+          return mapRating(movie.vote_average) === rating;
+        });
+        setMovies(filtered);
+      } else {
+        setMovies([]);
+      }
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+      setMovies([]);
+    }
+
     setLoading(false);
   }
 
-  async function handleSearch(text) {
+  function handleSearch(text) {
     setQuery(text);
     setPage(1);
   }
-  
+
   useEffect(() => {
     fetchMovies();
-    //eslint-disable-next-line react-hook/echaustive-deps
   }, [query, selectedGenres, rating, page]);
 
   return (

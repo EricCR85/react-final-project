@@ -4,7 +4,7 @@ export default function RatingFilter({ rating, onchange }) {
             <select
                 className="rating-select"
                 value={rating}
-                onchange={(e) => onchange(e.targert.value)}
+                onchange={(e) => onchange(e.target.value)}
         >
             <option value="">ALL RATINGS</option>
             <option value="G">G</option>
