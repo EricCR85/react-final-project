@@ -1,10 +1,10 @@
-export default function RatingFilter({ rating, onchange }) {
+export default function RatingFilter({ rating, onChange }) {
     return (
         <div className="rating-filter">
             <select
                 className="rating-select"
                 value={rating}
-                onchange={(e) => onchange(e.target.value)}
+                onchange={(e) => onChange(e.target.value)}
         >
             <option value="">ALL RATINGS</option>
             <option value="G">G</option>
