@@ -87,7 +87,7 @@ export default function Home() {
   const [rating, setRating] = useState("");
   const [page, setPage] = useState(1);
 
-  async function fetchMovies() {
+  const fetchMovies = React.useCallback(async () => {
     setLoading(true);
     const genreString = selectedGenres.join(",");
 
@@ -120,16 +120,16 @@ export default function Home() {
     }
 
     setLoading(false);
-  }
+  }, [query, selectedGenres, rating, page]);
 
   function handleSearch(text) {
     setQuery(text);
     setPage(1);
   }
 
-  useEffect(() => {
-    fetchMovies();
-  }, [query, selectedGenres, rating, page]);
+useEffect(() => {
+  fetchMovies();
+}, [fetchMovies]);
 
   return (
     <>
